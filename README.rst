@@ -1,9 +1,10 @@
-Template for the Read the Docs tutorial
-=======================================
+Documentação do SDK Korp para ASP NET Core
+==========================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+.. image:: https://readthedocs.org/projects/viasoft-core/badge/?version=latest
+    :target: https://viasoft-core.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
-Read the tutorial here:
+Leia a documentação aqui:
 
-https://docs.readthedocs.io/en/stable/tutorial/
+https://viasoft-core.readthedocs.io/en/latest/
