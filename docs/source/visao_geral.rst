@@ -1,8 +1,8 @@
 Visão Geral
 ===========
 
-Lista de issues nessa versão
-----------------------------
+Lista de issues nessa versão - |version|
+----------------------------------------
 
 SDKBACK-71_
 

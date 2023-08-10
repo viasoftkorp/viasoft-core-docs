@@ -1,5 +1,5 @@
-Bem vindo a documentação do Viasoft.Core
-========================================
+Bem vindo a documentação do Viasoft.Core - |version|
+====================================================
 
 **Viasoft.Core** é uma série de bibliotecas para desenvolvimento em c# utilizando ASP.NET Core.
 
