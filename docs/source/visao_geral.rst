@@ -4,6 +4,8 @@ Visão Geral
 Lista de issues nessa versão
 ----------------------------
 
+SDKBACK-94_
+
 SDKBACK-71_
 
 SDKBACK-77_
@@ -12,6 +14,7 @@ SDKBACK-79_
 
 SDKBACK-76_
 
+.. _SDKBACK-94: https://korp.youtrack.cloud/issue/SDKBACK-94
 .. _SDKBACK-71: https://korp.youtrack.cloud/issue/SDKBACK-71
 .. _SDKBACK-77: https://korp.youtrack.cloud/issue/SDKBACK-77
 .. _SDKBACK-79: https://korp.youtrack.cloud/issue/SDKBACK-79
@@ -173,3 +176,8 @@ Breaking Changes de compilação
   - CannotNotEvaluateLegacyCompany
   - CannotNotEvaluateEnvironment
   - CannotNotEvaluateCompany
+
+Correções
+---------
+
+* Proxy do FileProvider para arquivos com acentuação está funcionando corretamente.
