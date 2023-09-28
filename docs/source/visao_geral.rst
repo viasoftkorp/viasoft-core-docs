@@ -14,11 +14,14 @@ SDKBACK-79_
 
 SDKBACK-76_
 
+SDKBACK-18_
+
 .. _SDKBACK-94: https://korp.youtrack.cloud/issue/SDKBACK-94
 .. _SDKBACK-71: https://korp.youtrack.cloud/issue/SDKBACK-71
 .. _SDKBACK-77: https://korp.youtrack.cloud/issue/SDKBACK-77
 .. _SDKBACK-79: https://korp.youtrack.cloud/issue/SDKBACK-79
 .. _SDKBACK-76: https://korp.youtrack.cloud/issue/SDKBACK-76
+.. _SDKBACK-18: https://korp.youtrack.cloud/issue/SDKBACK-18
 
 Breaking Changes de tempo de execução
 -------------------------------------
@@ -181,3 +184,9 @@ Correções
 ---------
 
 * Proxy do FileProvider para arquivos com acentuação está funcionando corretamente.
+
+Features
+--------
+
+- Adicionar ``Viasoft.Core.LiquidTemplate``, para renderização de templates utilizando a linguagem Liquid:
+    - Para utilização, basta adicionar ``.AddLiquidTemplate()`` no ``Startup.cs`` e injetar ``ILiquidExpressionService`` onde necessário.
