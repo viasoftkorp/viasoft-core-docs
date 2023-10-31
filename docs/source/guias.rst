@@ -145,3 +145,32 @@ Os casos em que deverá retornar ``true`` por padrão são:
             return Task.FromResult(isRequired);
         }
    }
+
+.. _injetando-servicos-customizados-dbcontext:
+
+Injetando serviços customizados no DbContext
+-------------------------------------------------
+
+Realize a injeção das dependências no seu dbcontext:
+
+.. code-block:: c#
+
+    private TenantProperties _tenantProperties;
+    
+    public PostgreSqlDbProviderTestServiceDbContext(DbContextOptions options, ISchemaNameProvider schemaNameProvider, ILoggerFactory loggerFactory, IBaseDbContextConfigurationService configurationService, TenantProperties tenantProperties)
+        : base(options, schemaNameProvider, loggerFactory, configurationService)
+    {
+        _tenantProperties = tenantProperties;
+    }
+
+Na classe que DbContextDesignTime que implementa a interface ``PostgreSqlBaseDesignTimeDbContextFactory`` ou ``SqlServerBaseDesignTimeDbContextFactory`` liste os tipos das dependências na propriedade ``AllowedParameters`` no contrutor da classe:
+
+.. code-block:: c#
+
+    public class DbProviderTestServiceDbContextDesignTime : PostgreSqlBaseDesignTimeDbContextFactory<PostgreSqlDbProviderTestServiceDbContext>
+    {
+        public DbProviderTestServiceDbContextDesignTime()
+        {
+            AllowedParameters.Add(typeof(ITenantProperties));
+        }
+    }
