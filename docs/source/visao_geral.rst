@@ -12,10 +12,13 @@ SDKBACK-108_
 
 SDKBACK-116_
 
+SDKBACK-119_
+
 .. _PROP-1536: http://jira.korp.com.br/browse/PROP-1536
 .. _SDKBACK-103: https://korp.youtrack.cloud/issue/SDKBACK-103
 .. _SDKBACK-108: https://korp.youtrack.cloud/issue/SDKBACK-108
 .. _SDKBACK-116: https://korp.youtrack.cloud/issue/SDKBACK-116
+.. _SDKBACK-119: https://korp.youtrack.cloud/issue/SDKBACK-119
 
 Melhorias
 ---------
@@ -43,4 +46,9 @@ Breaking Changes
 * O método ``GetAllCompaniesAsync`` da interface ``GetAllCompaniesAsync`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * O método ``GetAllCompaniesAsync`` da interface ``ICompanyStore`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * O método ``GetAllCompaniesAsync`` da interface ``IAdministrationApi`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
-  
+* A classe ``UnitTestEfCoreUnitOfWorkMediator`` foi removida.
+
+Correções
+---------
+
+* Agora é possível utilizar transações em testes unitários utilizando ``IUnitOfWork``.
