@@ -14,11 +14,14 @@ SDKBACK-116_
 
 SDKBACK-119_
 
+WK-1_
+
 .. _PROP-1536: http://jira.korp.com.br/browse/PROP-1536
 .. _SDKBACK-103: https://korp.youtrack.cloud/issue/SDKBACK-103
 .. _SDKBACK-108: https://korp.youtrack.cloud/issue/SDKBACK-108
 .. _SDKBACK-116: https://korp.youtrack.cloud/issue/SDKBACK-116
 .. _SDKBACK-119: https://korp.youtrack.cloud/issue/SDKBACK-119
+.. _WK-1: https://portal.korp.com.br/projetos/7343c888-54d4-9ef3-3e57-4caba660f687/lista/e4b7502b-65c2-ea4d-83cf-22f04b9b5a5d
 
 Melhorias
 ---------
@@ -38,6 +41,10 @@ Melhorias
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 
+* ``ApplyAdvancedFilter`` agora suporta ``NodaTime.Instant`` e ``NodaTime.Instant?``
+
+* ``WorkflowController.PublishEventAsync`` agora envia tanto para o ``Workflow.Orchestrator`` quanto para o ``Workflow.Elsa``
+
 Breaking Changes
 ----------------
 
@@ -48,6 +55,7 @@ Breaking Changes
 * O método ``GetAllCompaniesAsync`` da interface ``ICompanyStore`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * O método ``GetAllCompaniesAsync`` da interface ``IAdministrationApi`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * A classe ``UnitTestEfCoreUnitOfWorkMediator`` foi removida.
+* Versão do ``Hangfire.Core`` trocada de ``1.7.30`` para ``1.7.28``, isto não deve causar problemas no código, mas a nível de ``.csproj`` pode haver conflitos, necessitando corrigir a versão.
 
 Correções
 ---------
