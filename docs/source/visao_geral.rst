@@ -14,11 +14,14 @@ SDKBACK-116_
 
 SDKBACK-119_
 
+PROM-242_
+
 .. _PROP-1536: http://jira.korp.com.br/browse/PROP-1536
 .. _SDKBACK-103: https://korp.youtrack.cloud/issue/SDKBACK-103
 .. _SDKBACK-108: https://korp.youtrack.cloud/issue/SDKBACK-108
 .. _SDKBACK-116: https://korp.youtrack.cloud/issue/SDKBACK-116
 .. _SDKBACK-119: https://korp.youtrack.cloud/issue/SDKBACK-119
+.. _PROM-242: https://portal.korp.com.br/projetos/e261cc03-896b-2316-6d90-dd1c1dc363e6/lista/84ade6c7-d489-ebdf-c066-c2e07599eeaf
 
 Melhorias
 ---------
@@ -48,6 +51,8 @@ Breaking Changes
 * O método ``GetAllCompaniesAsync`` da interface ``ICompanyStore`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * O método ``GetAllCompaniesAsync`` da interface ``IAdministrationApi`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * A classe ``UnitTestEfCoreUnitOfWorkMediator`` foi removida.
+* O método ``BatchHardDeleteAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
+* O método ``BatchUpdateAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
 
 Correções
 ---------
