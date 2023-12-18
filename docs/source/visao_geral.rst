@@ -51,8 +51,8 @@ Breaking Changes
 * O método ``GetAllCompaniesAsync`` da interface ``ICompanyStore`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * O método ``GetAllCompaniesAsync`` da interface ``IAdministrationApi`` agora aceita um novo parâmetro do tipo ``PagedFilteredAndSortedRequestInput``.
 * A classe ``UnitTestEfCoreUnitOfWorkMediator`` foi removida.
-* O método ``BatchHardDeleteAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterade de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
-* O método ``BatchUpdateAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterade de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
+* O método ``BatchHardDeleteAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
+* O método ``BatchUpdateAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
 
 Correções
 ---------
