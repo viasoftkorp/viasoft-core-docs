@@ -53,6 +53,7 @@ Breaking Changes
 * A classe ``UnitTestEfCoreUnitOfWorkMediator`` foi removida.
 * O método ``BatchHardDeleteAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
 * O método ``BatchUpdateAsync`` da classe ``EntityFrameworkCoreRepositoryExtensions`` teve o tipo do primeiro parametro alterado de ``IRepository`` para ``IQueryable``. Essa breaking change não requer alteração de código.
+* O método ``GetMessageDetailsByMessageTye`` da interface ``IServiceBusMessageMapping`` foi renomeado para ``GetMessageDetailsByMessageType``.
 
 Correções
 ---------
