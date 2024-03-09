@@ -118,3 +118,50 @@ Para habilitar o log detalhados de erros do EF Core, adicione a propriedade ``Db
   "DbContextOptions": {
     "EnableDetailedErrors": true
   }
+
+
+Configurando o grau máximo de paralelismo no ServiceBus
+-------------------------------------------------------
+
+Para configurar o grau máximo de paralelismo no ServiceBus, adicione a propriedade ``ServiceBus:MaxParallelism`` ao Consul. Seu valor padrão quando não informado é ``5``.
+
+.. code-block:: json
+
+  "ServiceBus": {
+    "MaxParallelism": 3
+  }
+
+Configurando o número de threads no ServiceBus
+----------------------------------------------
+
+Para configurar o número de threads no ServiceBus, adicione a propriedade ``ServiceBus:NumberOfWorkers`` ao Consul. Seu valor padrão quando não informado é ``1``.
+
+.. code-block:: json
+
+  "ServiceBus": {
+    "NumberOfWorkers": 1
+  }
+
+Configurando o número máximo de tentativas para mensagens que falham no ServiceBus
+----------------------------------------------------------------------------------
+
+Para configurar o número máximo de tentativas para mensagens que falham no ServiceBus, adicione a propriedade ``ServiceBus:MaxDeliveryAttempts`` ao Consul. Seu valor padrão quando não informado é ``3``.
+
+.. code-block:: json
+
+  "ServiceBus": {
+    "NumberOfWorkers": 1
+  }
+
+Configurando o PrefetchSize no ServiceBus
+-----------------------------------------
+
+Para configurar o PrefetchSize no ServiceBus, adicione a propriedade ``ServiceBus:PrefetchSize`` ao Consul. Seu valor padrão quando não informado é ``50``.
+
+.. code-block:: json
+
+  "ServiceBus": {
+    "Transport": {
+      "PrefetchSize": 100
+    }    
+  }

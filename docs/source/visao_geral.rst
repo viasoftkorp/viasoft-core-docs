@@ -42,7 +42,16 @@ Melhorias
 
 * Agora é possível configurar globalmente logs de dados sensíveis (parâmetros das queries) do EF Core, utilizando a propriedade ``"DbContextOptions:EnableSensitiveDataLogging"`` pelo Consul.
 
+* Agora é possível configurar o grau máximo de paralelismo no ServiceBus, utilizando a propriedade ``"ServiceBus:MaxParallelism"`` pelo Consul.
+
+* Agora é possível configurar o número máximo de "trabalhadores" (threads) no ServiceBus, utilizando a propriedade ``"ServiceBus:NumberOfWorkers"`` pelo Consul.
+
+* Agora é possível configurar o número máximo de tentativas para mensagens que falham no ServiceBus, utilizando a propriedade ``"ServiceBus:MaxDeliveryAttempts"`` pelo Consul.
+
+* Agora é possível configurar o PrefetchSize_ do broker rabbitmq, utilizando a propriedade ``"ServiceBus:Transport:PrefetchSize"`` pelo Consul.
+
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
+.. _PrefetchSize: https://www.rabbitmq.com/docs/consumer-prefetch
 
 Breaking Changes
 ----------------
