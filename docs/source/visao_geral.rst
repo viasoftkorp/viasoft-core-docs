@@ -28,16 +28,19 @@ Melhorias
 
 * Agora é possível especificar uma Culture_ ao exportar um relatório pelo método ``ExportAsync`` da interface ``IReportingStore``.
 
-
 * Agora é possível buscar connection strings de outros serviços pela ``IConnectionStringStore``, utilizando o método ``LoadConnectionStringsAsync`` e informando o nome do serviço desejado pelo parâmetro ``serviceName``.
 
-
 * Agora é possível buscar companies de maneira paginada e filtrada  pelo ``ICompanyStore``, utilizando o método ``GetAllCompaniesAsync`` e informando os parâmetros ``PagedFilteredAndSortedRequestInput``.
-
 
 * Agora é possível injetar serviços customizados no DbContext além dos já padrões, para isso foi disponibilizado a propriedade ``AllowedParameters`` na classe DbContextDesignTime que implementa a interface ``PostgreSqlBaseDesignTimeDbContextFactory`` ou ``SqlServerBaseDesignTimeDbContextFactory``.
 
 * Agora é possível criar parametros no sistema legado por meio do serviço ``ILegacyParametrosService`` usando os métodos ``WriteInteger```, ``WriteString`` e ``WriteBoolean``
+
+* Agora é possível configurar globalmente o tempo de timeout para todas as queries que são executadas pelo EF Core, utilizando a propriedade ``"DbContextOptions:CommandTimeout"`` pelo Consul.
+
+* Agora é possível configurar globalmente erros detalhados do EF Core, utilizando a propriedade ``"DbContextOptions:EnableDetailedErrors"`` pelo Consul.
+
+* Agora é possível configurar globalmente logs de dados sensíveis (parâmetros das queries) do EF Core, utilizando a propriedade ``"DbContextOptions:EnableSensitiveDataLogging"`` pelo Consul.
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 

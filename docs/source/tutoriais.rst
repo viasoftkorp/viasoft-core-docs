@@ -85,3 +85,36 @@ Para utilizar uma instância de ``IMapper``, utilize o método ``GetService`` do
 
 
 .. _aspnet-api-versioning: https://github.com/dotnet/aspnet-api-versioning/
+
+Aumentando o tempo de timeout de queries
+----------------------------------------
+
+Para aumentar o timeout de timeout das queries do EF Core, adicione a propriedade ``DbContextOptions:CommandTimeout`` ao Consul. Essa configuração é expressa em segundos, e seu valor padrão quando não informado é ``30``.
+
+.. code-block:: json
+
+  "DbContextOptions": {
+    "CommandTimeout": 10
+  }
+
+Habilitando log de parâmetros de queries
+----------------------------------------
+
+Para habilitar o log de parâmetros de queries do EF Core, adicione a propriedade ``DbContextOptions:EnableSensitiveDataLogging`` ao Consul. Seu valor padrão quando não informado é ``false``.
+
+.. code-block:: json
+
+  "DbContextOptions": {
+    "EnableSensitiveDataLogging": true
+  }
+
+Habilitando log detalhado de erros do EF Core
+----------------------------------------------
+
+Para habilitar o log detalhados de erros do EF Core, adicione a propriedade ``DbContextOptions:EnableDetailedErrors`` ao Consul. Seu valor padrão quando não informado é ``false``.
+
+.. code-block:: json
+
+  "DbContextOptions": {
+    "EnableDetailedErrors": true
+  }
