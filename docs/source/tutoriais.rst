@@ -150,7 +150,7 @@ Para configurar o número máximo de tentativas para mensagens que falham no Ser
 .. code-block:: json
 
   "ServiceBus": {
-    "NumberOfWorkers": 1
+    "MaxDeliveryAttempts": 7
   }
 
 Configurando o PrefetchSize no ServiceBus
