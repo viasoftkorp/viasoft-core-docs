@@ -50,6 +50,8 @@ Melhorias
 
 * Agora é possível configurar o PrefetchSize_ do broker rabbitmq, utilizando a propriedade ``"ServiceBus:Transport:PrefetchSize"`` pelo Consul.
 
+* Agora é possível configurar facilmente que as propriedades ``string`` ou ``decimal`` para utilizaram ``VARCHAR`` ou ``DECIMAL`` no banco de dados SQL Server.
+
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 .. _PrefetchSize: https://www.rabbitmq.com/docs/consumer-prefetch
 

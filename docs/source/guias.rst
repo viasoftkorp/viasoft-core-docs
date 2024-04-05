@@ -174,3 +174,59 @@ Na classe que DbContextDesignTime que implementa a interface ``PostgreSqlBaseDes
             AllowedParameters.Add(typeof(ITenantProperties));
         }
     }
+
+
+Mapeando as entidades para utilizarem ``VARCHAR`` ou ``DECIMAL``
+----------------------------------------------------------------
+
+Há disponível dois métodos de extensão para mapeamento da entidade no banco de dados SQL Server.
+
+- Mapeamento de propriedades ``string`` para colunas ``VARCHAR``, utilize ``entityTypeBuilder.ApplyVarcharColumnTypeForEntity()``.
+- Mapeamento de propriedades ``decimal`` para colunas ``DECIMAL(19,6)``, utilize ``entityTypeBuilder.ApplyDecimalMappingForEntity()``.
+
+Caso a extensão ``ApplyVarcharColumnTypeForEntity`` não esteja disponível, instale o pacote ``Viasoft.Core.EntityFrameworkCore.SQLServer.Legacy``.
+
+.. warning::
+
+    A extensão que mapeia para ``VARCHAR`` somente deve se utilizada nas entidade que acessarem o banco de dados do ERP desktop.
+
+No método ``OnModelCreating`` do seu ``DbContext``, busque a entidade a ser configurada utilizando o método ``Entity<>`` do ``ModelBuilder``.
+
+.. code-block:: c#
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        var estoque = modelBuilder.Entity<Estoque>();
+    }
+
+Utilize os métodos de extensão ``ApplyVarcharColumnTypeForEntity`` ou ``ApplyDecimalMappingForEntity`` para configurar.
+
+.. code-block:: c#
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        var estoque = modelBuilder.Entity<Estoque>();
+
+        stoque.ToTable("ESTOQUE");
+        
+        estoque
+            .Property(entity => entity.Codigo)
+            .HasColumnName("CODIGO")
+            .HasMaxLength(50);
+        
+        estoque
+            .Property(entity => entity.Descricao)
+            .HasColumnName("DESCRI")
+            .HasMaxLength(200);
+
+        estoque
+            .Property(entity => entity.SaldoReal)
+            .HasColumnName("SALDO");
+
+        estoque.ApplyDecimalMappingForEntity();
+        estoque.ApplyVarcharColumnTypeForEntity();
+    }
