@@ -34,7 +34,7 @@ Melhorias
 
 * Agora é possível injetar serviços customizados no DbContext além dos já padrões, para isso foi disponibilizado a propriedade ``AllowedParameters`` na classe DbContextDesignTime que implementa a interface ``PostgreSqlBaseDesignTimeDbContextFactory`` ou ``SqlServerBaseDesignTimeDbContextFactory``.
 
-* Agora é possível criar parametros no sistema legado por meio do serviço ``ILegacyParametrosService`` usando os métodos ``WriteInteger```, ``WriteString`` e ``WriteBoolean``
+* Agora é possível criar parâmetros no sistema legado por meio do serviço ``ILegacyParametrosService`` usando os métodos ``WriteInteger```, ``WriteString`` e ``WriteBoolean``.
 
 * Agora é possível configurar globalmente o tempo de timeout para todas as queries que são executadas pelo EF Core, utilizando a propriedade ``"DbContextOptions:CommandTimeout"`` pelo Consul.
 
@@ -51,6 +51,8 @@ Melhorias
 * Agora é possível configurar o PrefetchSize_ do broker rabbitmq, utilizando a propriedade ``"ServiceBus:Transport:PrefetchSize"`` pelo Consul.
 
 * Agora é possível configurar facilmente que as propriedades ``string`` ou ``decimal`` para utilizaram ``VARCHAR`` ou ``DECIMAL`` no banco de dados SQL Server.
+
+* Agora é possível configurar configurar as consultas do AdvancedFilter para serem case sensitive/insensitive.
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 .. _PrefetchSize: https://www.rabbitmq.com/docs/consumer-prefetch

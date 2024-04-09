@@ -230,3 +230,30 @@ Utilize os métodos de extensão ``ApplyVarcharColumnTypeForEntity`` ou ``ApplyD
         estoque.ApplyDecimalMappingForEntity();
         estoque.ApplyVarcharColumnTypeForEntity();
     }
+
+Configurando as consultas do AdvancedFilter para case sensitive/insensitive
+---------------------------------------------------------------------------
+
+Para configurar as consultas do AdvancedFilter, utilize a flag ``BuildExpressionOptions.Default.CaseInsensitiveStringComparision`` no ``Startup``.
+
+- Case sensitive
+
+.. code-block:: c#
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        BuildExpressionOptions.Default.CaseInsensitiveStringComparision = false;
+    }
+
+- Case insensitive
+
+.. code-block:: c#
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        BuildExpressionOptions.Default.CaseInsensitiveStringComparision = true;
+    }
+
+.. warning::
+
+    Os serviços que acessam SQL Server devem utilizar a flag com o valor ``false`` pois a configuração de *sensitivity* está a nível de banco de dados.
