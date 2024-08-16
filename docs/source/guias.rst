@@ -257,3 +257,23 @@ Para configurar as consultas do AdvancedFilter, utilize a flag ``BuildExpression
 .. warning::
 
     Os serviços que acessam SQL Server devem utilizar a flag com o valor ``false`` pois a configuração de *sensitivity* está a nível de banco de dados.
+
+Utilizando o System.Text.JSON nas chamadas HTTP
+-----------------------------------------------
+
+Para utilizar o serializdor ``System.Text.JSON.JsonSerializer`` utilize o método ``UseNewSerializer`` informando os dois parâmetros como ``true``.
+
+.. code-block:: c#
+
+    public Task<Cliente> RequisitarCliente(Guid id)
+    {
+       var call = _apiClientCallBuilder
+            .WithEndpoint($"/clientes/{id}")
+            .WithServiceName(Endpoints.ServiceName)
+            .WithHttpMethod(HttpMethod.Get)
+            .UseNewSerializer(true, true)
+            .Build();
+            
+        var result = await call.ResponseCallAsync<Cliente>();
+        return result;
+    }

@@ -52,7 +52,12 @@ Melhorias
 
 * Agora é possível configurar facilmente que as propriedades ``string`` ou ``decimal`` para utilizaram ``VARCHAR`` ou ``DECIMAL`` no banco de dados SQL Server.
 
-* Agora é possível configurar configurar as consultas do AdvancedFilter para serem case sensitive/insensitive.
+* Agora é possível configurar as consultas do AdvancedFilter para serem case sensitive/insensitive.
+
+* Agora é possível configurar para que uma chamada HTTP utilize o ``System.Text.JSON`` ao serializar o corpo de envio.
+
+* Agora é possível informar um Notification Update Id customizado ao utilizar o método ``SendUpdateAsync``.
+
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 .. _PrefetchSize: https://www.rabbitmq.com/docs/consumer-prefetch
