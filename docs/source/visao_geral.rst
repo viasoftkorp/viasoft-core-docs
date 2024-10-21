@@ -16,12 +16,15 @@ SDKBACK-119_
 
 PROM-242_
 
+SDKB-52_
+
 .. _PROP-1536: http://jira.korp.com.br/browse/PROP-1536
 .. _SDKBACK-103: https://korp.youtrack.cloud/issue/SDKBACK-103
 .. _SDKBACK-108: https://korp.youtrack.cloud/issue/SDKBACK-108
 .. _SDKBACK-116: https://korp.youtrack.cloud/issue/SDKBACK-116
 .. _SDKBACK-119: https://korp.youtrack.cloud/issue/SDKBACK-119
 .. _PROM-242: https://portal.korp.com.br/projetos/e261cc03-896b-2316-6d90-dd1c1dc363e6/lista/84ade6c7-d489-ebdf-c066-c2e07599eeaf
+.. _SDKB-52: https://portal.korp.com.br/projetos/935791cf-dbfc-6432-00ce-8a691531e47f/lista?identificador=SDKB-52
 
 Melhorias
 ---------
@@ -80,3 +83,4 @@ Correções
 ---------
 
 * Agora é possível utilizar transações em testes unitários utilizando ``IUnitOfWork``.
+* Adicionado argumento de ``BuildExpressionOptions`` ao ``ApplyAdvancedFilter``, permitindo passar a opção de ``ClientSide`` dessa forma evitando uma breaking change relacionada ao advancedFilter quando a função de ``Contains`` é utilizada no client side.
