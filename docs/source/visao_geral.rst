@@ -61,6 +61,8 @@ Melhorias
 
 * Agora é possível informar um Notification Update Id customizado ao utilizar o método ``SendUpdateAsync``.
 
+* Agora é possível informar um ``HttpContent`` ao corpo de um ``ApiClientCall``.
+
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
 .. _PrefetchSize: https://www.rabbitmq.com/docs/consumer-prefetch
