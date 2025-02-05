@@ -18,6 +18,8 @@ PROM-242_
 
 SDKB-52_
 
+RFEN-175_
+
 .. _PROP-1536: http://jira.korp.com.br/browse/PROP-1536
 .. _SDKBACK-103: https://korp.youtrack.cloud/issue/SDKBACK-103
 .. _SDKBACK-108: https://korp.youtrack.cloud/issue/SDKBACK-108
@@ -25,6 +27,7 @@ SDKB-52_
 .. _SDKBACK-119: https://korp.youtrack.cloud/issue/SDKBACK-119
 .. _PROM-242: https://portal.korp.com.br/projetos/e261cc03-896b-2316-6d90-dd1c1dc363e6/lista/84ade6c7-d489-ebdf-c066-c2e07599eeaf
 .. _SDKB-52: https://portal.korp.com.br/projetos/935791cf-dbfc-6432-00ce-8a691531e47f/lista?identificador=SDKB-52
+.. _RFEN-175: https://portal.korp.com.br/projetos/c2fe24bf-5393-742e-e371-237e95e9b08f/lista?identificador=RFEN-175
 
 Melhorias
 ---------
@@ -62,6 +65,8 @@ Melhorias
 * Agora é possível informar um Notification Update Id customizado ao utilizar o método ``SendUpdateAsync``.
 
 * Agora é possível informar um ``HttpContent`` ao corpo de um ``ApiClientCall``.
+
+* Agora é possível incrementar e obter o valor de um parâmetro inteiro pelo ``ILegacyParametrosService``, utilizando o método ``ReadAutoIncrementInteger``. Irá criar caso o parâmetro não exista, definindo o valor inicial como input.DefaultValue + 1.
 
 
 .. _Culture: https://learn.microsoft.com/pt-br/dotnet/api/system.globalization.cultureinfo?view=net-7.0
