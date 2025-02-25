@@ -5,6 +5,7 @@ Lista de issues nessa versão
 ----------------------------
 
 RFEN-175_
+
 SDKB-102_
 
 .. _RFEN-175: https://portal.korp.com.br/projetos/c2fe24bf-5393-742e-e371-237e95e9b08f/lista?identificador=RFEN-175
