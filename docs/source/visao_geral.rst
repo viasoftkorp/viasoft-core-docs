@@ -27,6 +27,4 @@ Breaking Changes
 Correções
 ---------
 
-* Agora é possível utilizar transações em testes unitários utilizando ``IUnitOfWork``.
-* Adicionado argumento de ``BuildExpressionOptions`` ao ``ApplyAdvancedFilter``, permitindo passar a opção de ``ClientSide`` dessa forma evitando uma breaking change relacionada ao advancedFilter quando a função de ``Contains`` é utilizada no client side.
 * Agora o ``NotificationUpdateId`` é conduzido corretamente para BackgroundJob, portanto enviar notificações pelo ``IPushNotification`` funcionará em jobs
