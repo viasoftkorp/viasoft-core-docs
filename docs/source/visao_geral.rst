@@ -24,3 +24,7 @@ Breaking Changes
 
 * Filtros por TenantId (classes que implementam ``IMustHaveTenant``) e filtros por EnvironmentId (classes que implementam ``IMustHaveEnvironment``) agora avaliam se o schema já está separado por Tenant ou Environment, dessa forma evitando adicionar o WHERE de forma desnecessária (aumentando a performance). Essa breaking change não requer alteração de código.
 
+Correções
+---------
+
+* Agora o ``NotificationUpdateId`` é conduzido corretamente para BackgroundJob, portanto enviar notificações pelo ``IPushNotification`` funcionará em jobs
