@@ -18,6 +18,7 @@ Melhorias
 * Adicionado novo método ``valorDecimal.ArredondarAbnt()`` (de ``Viasoft.Core.DecimalRounding``), permitindo arredonda um valor decimal para 2 casas decimais utilizando o método de arredondamento "para longe de zero", conforme a norma ABNT NBR 5891. Este método arredonda valores exatamente no meio (como x.xx5) sempre  na direção oposta ao zero (valores positivos são arredondados para cima e negativos para baixo).
 * Agora o método ``TriggerRecurringJobAsync`` do serviço ``IBackgroundJobManager`` retorna o id do job que foi "Triggered".
 * Agora é possível enviar ``CC`` ao enviar um email pelo serviço ``IEmailSender``. Utilize a propriedade ``Cc`` no ``EmailSenderInput``.
+* Agora o proxy pra a controller do Authentication ``AuthenticationProxyController`` expõe a rota ``users/default-image`` responsável por pegar a imagem de placeholder para um usuário que não tem foto.
 
 Breaking Changes
 ----------------
