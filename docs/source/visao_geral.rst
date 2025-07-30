@@ -19,6 +19,7 @@ Melhorias
 * Agora o método ``TriggerRecurringJobAsync`` do serviço ``IBackgroundJobManager`` retorna o id do job que foi "Triggered".
 * Agora é possível enviar ``CC`` ao enviar um email pelo serviço ``IEmailSender``. Utilize a propriedade ``Cc`` no ``EmailSenderInput``.
 * Agora o proxy pra a controller do Authentication ``AuthenticationProxyController`` expõe a rota ``users/default-image`` responsável por pegar a imagem de placeholder para um usuário que não tem foto.
+* Agora é possível configurar quando os valores de propriedades normalizadas para ``IMustHaveCompany`` e ``IMustHaveLegacyCompany`` podem ser sobrescritas :ref:`configurando-override-property-normalizer`.
 
 Breaking Changes
 ----------------

@@ -165,3 +165,21 @@ Para configurar o PrefetchSize no ServiceBus, adicione a propriedade ``ServiceBu
       "PrefetchSize": 100
     }    
   }
+
+.. _configurando-override-property-normalizer:
+
+Configurando quando as propriedades normalizadas devem ser sobrescritas
+-----------------------------------------------------------------------
+
+Para configurar quando os valores de propriedades normalizadas devem ser sobrescritos, configure as propriedades ``AlwaysOverrideCompanyValue`` e ``AlwaysOverrideCreationTimeValue`` ao utilizar o método ``AddDomainDrivenDesign``. O valor padrão das duas propriedades é ``true``.
+
+- AlwaysOverrideCompanyValue terá impacto nas interfaces ``IMustHaveCompany`` e ``IMustHaveLegacyCompany``
+- AlwaysOverrideCreationTimeValue terá impacto na interface ``ICreationAuditedEntity``.
+
+.. code-block:: c#
+  
+  .AddDomainDrivenDesign(options =>
+  {
+      options.CompanyNormalizerOptions.AlwaysOverrideCompanyValue = false;
+      options.CreationAuditOptions.AlwaysOverrideCreationTimeValue = false;
+  })
