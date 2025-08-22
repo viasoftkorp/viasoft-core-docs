@@ -1,34 +1,10 @@
 Tutoriais
 #########
 
-.. _ef-property-versioning:
-
-Adicionando versionamento em propriedades de entidades EF Core
---------------------------------------------------------------
-
-Em cenários onde diferentes versões do banco de dados podem ou não conter determinadas colunas, é possível controlar o mapeamento de propriedades no EF Core utilizando o atributo ``[MinimumVersion("2025.1.0")]``.
-
-O parâmetro ``minimumVersion`` refere-se a versão mínima necessária do banco de dados para que a propriedade seja considerada, caso contrário ela será ignorada.
-
-.. code-block:: c#
-
-   using Viasoft.Core.AmbientData.Attributes;
-   
-   [Table("Cities")]
-   public class City
-   {
-      [MinimumVersion("2024.3.0")]
-      public string CityName { get; set; }
-
-      [MinimumVersion("2025.1.0")]
-      public string Postcode { get; set; }
-
-      public decimal? Population { get; set; }
-   }
+.. _adicionando-automapper-em-testes-unitarios:
 
 Adicionando versionamento a API
 -------------------------------
-.. _aspnet-api-versioning: https://github.com/dotnet/aspnet-api-versioning/
 
 Para habilitar versionamento na API, você deve utilizar o método ``AddVersioning()``.
 O parâmetro ``configuration`` deve ser alimentado com o campo ``_configuration`` disponível no ``Startup``.
@@ -50,8 +26,6 @@ Além de adicionar a biblioteca de versionamento, é necessário anotar **todas*
    {        
    }
 
-
-.. _retrieving-ambient-data:
 
 Recuperando informações AmbientData
 -----------------------------------
@@ -75,7 +49,6 @@ TenantId             GetTenantId()
 UserId               GetUserId()
 CompanyId            GetCompanyId()
 EnvironmentId        GetEnvironmentIdOrThrow()
-Environment          GetEnvironment()
 LegacyCompanyId      GetLegacyCompanyId()
 NotificationUpdateId GetNotificationUpdateId()
 ApiVersion           GetApiVersion()
@@ -109,6 +82,9 @@ Para utilizar uma instância de ``IMapper``, utilize o método ``GetService`` do
 .. code-block:: c#
 
    var mapper = ServiceProvider.GetService<IMapper>();
+
+
+.. _aspnet-api-versioning: https://github.com/dotnet/aspnet-api-versioning/
 
 Aumentando o tempo de timeout de queries
 ----------------------------------------
