@@ -187,9 +187,9 @@ Para configurar quando os valores de propriedades normalizadas devem ser sobresc
 Buscando parêmetros em batch
 ----------------------------
 
-Para realizar a busca de parâmetros em batch, deve ser injetado o ``ILegacyParametrosService`` e chamado o método ``ReadBatch´´.
+Para realizar a busca de parâmetros em batch, deve ser injetado o ``ILegacyParametrosService`` e chamado o método ``ReadBatch``.
 
-.. code-block: c#
+.. code-block:: c#
 
    public class ReadBatchInput
    {
