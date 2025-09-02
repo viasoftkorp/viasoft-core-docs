@@ -191,6 +191,11 @@ Para realizar a busca de parâmetros em batch, deve ser injetado o ``ILegacyPara
 
 .. code-block:: c#
 
+   public interface ILegacyParametrosService
+   {
+        public Task<ContextoBatchParametros> ReadBatch(ReadBatchInput input);
+   }
+
    public class ReadBatchInput
    {
       public List<ReadBatchItemInput> Parametros { get; set; }
