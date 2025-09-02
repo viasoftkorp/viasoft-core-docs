@@ -183,3 +183,49 @@ Para configurar quando os valores de propriedades normalizadas devem ser sobresc
       options.CompanyNormalizerOptions.AlwaysOverrideCompanyValue = false;
       options.CreationAuditOptions.AlwaysOverrideCreationTimeValue = false;
   })
+
+Buscando parêmetros em batch
+----------------------------
+
+Para realizar a busca de parâmetros em batch, deve ser injetado o ``ILegacyParametrosService`` e chamado o método ``ReadBatch´´.
+
+.. code-block: c#
+
+   public class ReadBatchInput
+   {
+      public List<ReadBatchItemInput> Parametros { get; set; }
+   }
+
+   public class ReadBatchItemInput
+   {
+      public string Secao { get; set; }
+      public string Chave { get; set; }
+      public object DefaultValue { get; set; }
+   }
+
+   public class ContextoBatchParametros : Dictionary<string, string>
+   {
+     public string ReadString(string secao, string chave)
+     {
+        return this[secao + chave];
+     }
+     public int ReadInteger(string secao, string chave)
+     {
+        var valor = this[secao + chave];
+        return valor == null ? 0 : int.Parse(valor);
+     }
+     public int? ReadIntegerNullable(string secao, string chave)
+     {
+        var valor = this[secao + chave];
+        return string.IsNullOrWhiteSpace(valor) ? null : int.Parse(valor);
+     }
+     public bool ReadBoolean(string secao, string chave)
+     {
+        return ParseStringToBoolean(this[secao + chave]);
+     }
+
+     private bool ParseStringToBoolean(string input)
+     {
+        return input == "T" ;
+     }
+   }
