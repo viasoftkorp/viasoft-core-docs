@@ -277,3 +277,79 @@ Para utilizar o serializdor ``System.Text.JSON.JsonSerializer`` utilize o métod
         var result = await call.ResponseCallAsync<Cliente>();
         return result;
     }
+
+Adicionando um step customizado ao pipeline de execução do ServiceBus
+---------------------------------------------------------------------
+
+Ao registrar o ServiceBus no `IServiceCollection` é possível configurar um *step* customizado para ser executado no momento em que uma mensagem é recebida ou enviada. Esse passo permite alterar o comportamento do pipeline, incluindo bloqueio de execução de *handlers*, enriquecimento de contexto ou métricas.
+
+Passos para configurar:
+
+1. Crie o step herdando de ``CustomIncomingStepBase`` (ou ``IOutgoingStep`` para pipeline de saída) e implemente ``ExecuteAsync``.
+2. Registre o step via ``AddServiceBus`` utilizando a opção ``PipelineConfigurer``.
+3. Defina a posição relativa no pipeline com ``PipelineStepInjector.OnReceive(...)`` (ou ``PipelineStepInjector.OnSend(...)`` para pipeline de saída).
+
+Exemplo de registro no ``Startup``:
+
+.. code-block:: csharp
+
+    serviceCollection.AddServiceBus(options =>
+    {
+        options.PipelineConfigurer = configurer =>
+        {
+            configurer.Decorate<IPipeline>(c =>
+            {
+                var pipeline = c.Get<IPipeline>();
+                var step = new AmbientVersionServiceBusCustomIncomingStep(); // Seu step customizado
+
+                return new PipelineStepInjector(pipeline)
+                    .OnReceive(step, PipelineRelativePosition.Before, typeof(ProvisioningIncomingStep)); // Ou OnSend para pipeline de saída
+            });
+        };
+    }, ServiceConfiguration, _configuration);
+
+Implementação de um step customizado:
+
+.. code-block:: csharp
+
+    // Step customizado para ignorar handler de acordo com versão do banco
+    public class AmbientVersionServiceBusCustomIncomingStep : CustomIncomingStepBase
+    {
+        protected override async Task ExecuteAsync(IncomingStepContext context, Func<Task> next)
+        {
+            var serviceProvider = context.GetServiceProvider();
+            var ambientData = serviceProvider.GetRequiredService<IAmbientData>();
+            var dbVersion = ambientData.GetEnvironmentDesktopDatabaseVersion();
+
+            var handleType = context.GetHandleType();
+            var handlerMethod = context.GetHandlerHandleMethod();
+            
+            // Aceita atributo na classe ou método
+            var minVersionAttr = 
+                handlerMethod.GetCustomAttribute<MinimumVersionAttribute>(inherit: true)
+                ?? handleType.GetCustomAttribute<MinimumVersionAttribute>(inherit: true);
+            
+            if (minVersionAttr is not null)
+            {
+                if (string.IsNullOrEmpty(dbVersion))
+                {
+                    throw new ArgumentException(
+                        $"A versão do banco não está disponível para prosseguir com o método {handlerMethod.Name} de {handleType.FullName}");
+                }
+
+                if (minVersionAttr.IsVersionGreaterThan(dbVersion))
+                {
+                    // Interrompe o dispatch do handler e os demais steps customizados
+                    context.AbortDispatchAndRemainingCustomSteps();
+                }
+            }
+
+            await next();
+        }
+    }
+
+Observações:
+
+* Utilize ``context.GetServiceProvider()`` para acessar serviços do DI no step.
+* A ordem dos steps influencia o comportamento. Use ``PipelineRelativePosition.Before/After`` com o tipo de um step existente para posicionamento preciso.
+* Para impedir a execução do handler e dos demais ``CustomIncomingStepBase`` seguintes, chame ``context.AbortDispatchAndRemainingCustomSteps()``.
