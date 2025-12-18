@@ -8,8 +8,11 @@ RFEN-175_
 
 SDKB-102_
 
+SDK-374_
+
 .. _RFEN-175: https://portal.korp.com.br/projetos/c2fe24bf-5393-742e-e371-237e95e9b08f/lista?identificador=RFEN-175
 .. _SDKB-102: https://portal.korp.com.br/projetos/935791cf-dbfc-6432-00ce-8a691531e47f/lista?identificador=SDKB-102
+.. _SDK-374: https://portal.korp.com.br/projetos/17e7c0ff-587f-363e-4791-8b5ca6ffb9ac/lista?identificador=SDK-374
 
 Melhorias
 ---------
@@ -30,3 +33,5 @@ Correções
 ---------
 
 * Agora o ``NotificationUpdateId`` é conduzido corretamente para BackgroundJob, portanto enviar notificações pelo ``IPushNotification`` funcionará em jobs
+* Corrigida a checagem de atributos de AmbientData para considerar também atributos configurados em classes e métodos base nos entry points das aplicações (Controllers, Background Jobs e ServiceBus Events). Ex: se uma classe controller base possui [CompanyNotRequired], a checagem desse atributo será respeitada em classes derivadas.
+
