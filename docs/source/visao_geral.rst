@@ -33,5 +33,5 @@ Correções
 ---------
 
 * Agora o ``NotificationUpdateId`` é conduzido corretamente para BackgroundJob, portanto enviar notificações pelo ``IPushNotification`` funcionará em jobs
-* Corrigida a checagem de atributos de ``AmbientData`` para considerar também atributos configurados em classes e métodos base nos entry points das aplicações (Controllers, Background Jobs e Events). Ex: se uma classe controller base possui ``[CompanyNotRequired]``, a checagem desse atributo será respeitada em classes derivadas.
+* Agora a checagem de atributos de ``AmbientData`` considera também atributos configurados em classes e métodos. Ex: se uma classe controller base possui ``[CompanyNotRequired]``, a checagem desse atributo será respeitada em classes derivadas.
 
