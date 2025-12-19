@@ -278,6 +278,8 @@ Para utilizar o serializdor ``System.Text.JSON.JsonSerializer`` utilize o métod
         return result;
     }
 
+.. _adicionando-step-pipeline-servicebus:
+
 Adicionando um step customizado ao pipeline de execução do ServiceBus
 ---------------------------------------------------------------------
 
