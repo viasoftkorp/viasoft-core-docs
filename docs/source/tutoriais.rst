@@ -1,10 +1,137 @@
 Tutoriais
 #########
 
-.. _adicionando-automapper-em-testes-unitarios:
+.. _ef-property-versioning:
+
+Adicionando versionamento em propriedades de entidades EF Core
+--------------------------------------------------------------
+
+Em cenários onde diferentes versões do banco de dados podem ou não conter determinadas colunas, é possível controlar o mapeamento de propriedades no EF Core utilizando o atributo ``[MinimumVersion("2025.1.0")]``.
+
+O parâmetro ``minimumVersion`` refere-se a versão mínima necessária do banco de dados para que a propriedade seja considerada, caso contrário ela será ignorada.
+
+.. code-block:: c#
+
+   using Viasoft.Core.AmbientData.Attributes;
+   using Viasoft.Core.MultiTenancy.Abstractions.Consts;
+   
+   [Table("Cities")]
+   public class City
+   {
+      [MinimumVersion(DatabaseVersionConsts.V2024_3_0)]
+      public string CityName { get; set; }
+
+      [MinimumVersion(DatabaseVersionConsts.V2025_1_0)]
+      public string Postcode { get; set; }
+
+      public decimal? Population { get; set; }
+   }
+
+Versionamento em propriedades de entidades EF Core em testes unitários com UnitTestBase
+--------------------------------------------------
+
+Quando o versionamento de propriedades por versão de banco está habilitado, os testes baseados em ``UnitTestBase`` passam a depender de quando a versão desktop é definida.
+
+O fluxo é controlado por três pontos:
+
+- ``CreateDatabaseExplicitly``: define se o banco será criado automaticamente no construtor.
+- ``DefaultDesktopDatabaseVersion``: versão usada na criação automática.
+- ``SetVersionAndCreateDatabase(version)``: define a versão no AmbientData e cria o banco.
+
+Regra importante: ``SetVersionAndCreateDatabase`` só pode ser chamado uma vez por instância de teste. Após a criação do banco, uma nova chamada lança ``InvalidOperationException``.
+
+Compatibilidade e migração de testes existentes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Por padrão, testes que **não** precisam controlar explicitamente a versão do banco de dados **não precisam de nenhuma alteração**.
+
+Para testes que antes definiam a versão dentro de ``ConfigureServices``, o padrão recomendado agora é sobrescrever ``DefaultDesktopDatabaseVersion``.
+
+Antes:
+
+.. code-block:: c#
+
+  protected override void ConfigureServices()
+  {
+    var tenantProperties = ServiceProvider.GetService<ITenantProperties>();
+    tenantProperties.SetDesktopDatabaseVersion("2024.3.0");
+    base.ConfigureServices();
+  }
+
+Depois:
+
+.. code-block:: c#
+
+  protected override string DefaultDesktopDatabaseVersion => DatabaseVersionConsts.V2024_3_0;
+
+Modo 1: criação automática no construtor (padrão)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use quando todos os testes da classe podem usar a mesma versão.
+
+.. code-block:: c#
+
+   public class LegacyCityUnitTest : UnitTestBase
+   {
+     protected override string DefaultDesktopDatabaseVersion => "2025.2.0";
+
+     protected override Type GetDbContextType()
+     {
+       return typeof(LegacyTesteEfCoreContext);
+     }
+   }
+
+Nesse modo, o construtor de ``UnitTestBase`` já executa internamente:
+
+.. code-block:: c#
+
+   SetVersionAndCreateDatabase(DefaultDesktopDatabaseVersion);
+
+Portanto, chamar ``SetVersionAndCreateDatabase`` novamente dentro do teste gera exceção.
+
+Modo 2: criação explícita por método de teste
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use quando cada teste precisa validar comportamentos com versões diferentes.
+
+.. code-block:: c#
+
+   public class EntityPropertyVersioningTestBase : UnitTestBase
+   {
+     protected override bool CreateDatabaseExplicitly => true;
+
+     protected override Type GetDbContextType()
+     {
+       return typeof(PropertyVersioningDbContext);
+     }
+   }
+
+Com ``CreateDatabaseExplicitly => true``, cada teste define a versão desejada antes de usar o repositório/DbContext:
+
+.. code-block:: c#
+
+   [Theory]
+   [InlineData(DatabaseVersionConsts.V2023_4_0)]
+   [InlineData(DatabaseVersionConsts.V2024_1_0)]
+   [InlineData(DatabaseVersionConsts.V2025_1_0)]
+   public void ShouldRespectPropertyVersioning(string version)
+   {
+     SetVersionAndCreateDatabase(version);
+
+     // Executa asserções considerando o mapeamento da versão informada.
+   }
+
+Resumo prático
+^^^^^^^^^^^^^^
+
+- Se o teste não depende de uma versão específica de banco: nenhuma alteração é necessária.
+- Se a versão é fixa na classe de teste: sobrescreva apenas ``DefaultDesktopDatabaseVersion``.
+- Se a versão muda por cenário: sobrescreva ``CreateDatabaseExplicitly`` como ``true`` e chame ``SetVersionAndCreateDatabase`` no início do teste.
+- Nunca chame ``SetVersionAndCreateDatabase`` duas vezes na mesma instância de teste.
 
 Adicionando versionamento a API
 -------------------------------
+.. _aspnet-api-versioning: https://github.com/dotnet/aspnet-api-versioning/
 
 Para habilitar versionamento na API, você deve utilizar o método ``AddVersioning()``.
 O parâmetro ``configuration`` deve ser alimentado com o campo ``_configuration`` disponível no ``Startup``.
@@ -26,6 +153,8 @@ Além de adicionar a biblioteca de versionamento, é necessário anotar **todas*
    {        
    }
 
+
+.. _retrieving-ambient-data:
 
 Recuperando informações AmbientData
 -----------------------------------
@@ -49,6 +178,7 @@ TenantId             GetTenantId()
 UserId               GetUserId()
 CompanyId            GetCompanyId()
 EnvironmentId        GetEnvironmentIdOrThrow()
+Environment          GetEnvironment()
 LegacyCompanyId      GetLegacyCompanyId()
 NotificationUpdateId GetNotificationUpdateId()
 ApiVersion           GetApiVersion()
@@ -82,9 +212,6 @@ Para utilizar uma instância de ``IMapper``, utilize o método ``GetService`` do
 .. code-block:: c#
 
    var mapper = ServiceProvider.GetService<IMapper>();
-
-
-.. _aspnet-api-versioning: https://github.com/dotnet/aspnet-api-versioning/
 
 Aumentando o tempo de timeout de queries
 ----------------------------------------
