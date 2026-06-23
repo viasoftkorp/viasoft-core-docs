@@ -111,9 +111,9 @@ Com ``CreateDatabaseExplicitly => true``, cada teste define a versão desejada a
 .. code-block:: c#
 
    [Theory]
-   [InlineData("2023.4.0")]
-   [InlineData("2024.1.0")]
-   [InlineData("2025.1.0")]
+   [InlineData(DatabaseVersionConsts.V2023_4_0)]
+   [InlineData(DatabaseVersionConsts.V2024_1_0)]
+   [InlineData(DatabaseVersionConsts.V2025_1_0)]
    public void ShouldRespectPropertyVersioning(string version)
    {
      SetVersionAndCreateDatabase(version);
